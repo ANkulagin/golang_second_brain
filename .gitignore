@@ -48,3 +48,6 @@ coverage.out
 
 # Lock files
 go.sum
+
+# Untracked files
+decorate
