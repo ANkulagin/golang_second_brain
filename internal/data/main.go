@@ -65,7 +65,7 @@ func main() {
 				// Проверяем, является ли строка данными таблицы
 				if strings.HasPrefix(line, "|") {
 					columns := strings.Split(line, "|")
-					if len(columns) >= 4 {
+					if len(columns) >= 3 {
 						category := strings.TrimSpace(columns[1])
 						andreyAmount, _ := strconv.Atoi(strings.TrimSpace(columns[2]))
 						yuliaAmount, _ := strconv.Atoi(strings.TrimSpace(columns[3]))
