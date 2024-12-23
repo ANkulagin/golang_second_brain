@@ -30,8 +30,8 @@ func main() {
 		if err != nil {
 			return err
 		}
-		// Проверяем, что это файл и его имя оканчивается на ".md"
-		if !info.IsDir() && strings.HasSuffix(info.Name(), ".md") {
+		// Проверяем, что это файл, его имя оканчивается на ".md" и относится к декабрю
+		if !info.IsDir() && strings.HasSuffix(info.Name(), ".md") && strings.HasPrefix(info.Name(), "2024-12") {
 			file, err := os.Open(path)
 			if err != nil {
 				fmt.Println("Ошибка открытия файла:", err)
@@ -39,15 +39,33 @@ func main() {
 			}
 			defer file.Close()
 
+			// Флаг для отслеживания текущей секции
+			inExpensesSection := false
+
 			// Читаем файл построчно
 			scanner := bufio.NewScanner(file)
 			for scanner.Scan() {
 				line := scanner.Text()
 
+				// Проверяем, что находимся в секции "Expenses"
+				if strings.Contains(line, "## 🧾 Expenses") {
+					inExpensesSection = true
+					continue
+				}
+				if strings.Contains(line, "## 🧾 Income") {
+					inExpensesSection = false
+					continue
+				}
+
+				// Если мы не в секции "Expenses", пропускаем строки
+				if !inExpensesSection {
+					continue
+				}
+
 				// Проверяем, является ли строка данными таблицы
 				if strings.HasPrefix(line, "|") {
 					columns := strings.Split(line, "|")
-					if len(columns) >= 3 {
+					if len(columns) >= 4 {
 						category := strings.TrimSpace(columns[1])
 						andreyAmount, _ := strconv.Atoi(strings.TrimSpace(columns[2]))
 						yuliaAmount, _ := strconv.Atoi(strings.TrimSpace(columns[3]))

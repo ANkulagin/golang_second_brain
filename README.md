@@ -3,7 +3,7 @@ go build -o decorate ./cmd/decorate
 ```
 
 ```
- ./decorate  -path="/home/ankul/src/obsidian"
+ ./decorate  -path="/home/ankul/obsidian"
 ```
 ```
 go build -o wiki  ./cmd/wiki
