@@ -18,7 +18,7 @@ type Expense struct {
 
 func main() {
 	// Путь к папке с файлами
-	dir := "/home/ankul/obsidian/_notes/daily"
+	dir := "/Users/ankul/obsidian/_notes/daily"
 
 	// Инициализируем переменные для хранения общих сумм и данных по категориям
 	totalAndrey := 0
