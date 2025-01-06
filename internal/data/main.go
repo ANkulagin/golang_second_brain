@@ -31,7 +31,7 @@ func main() {
 			return err
 		}
 		// Проверяем, что это файл, его имя оканчивается на ".md" и относится к декабрю
-		if !info.IsDir() && strings.HasSuffix(info.Name(), ".md") && strings.HasPrefix(info.Name(), "2024-12") {
+		if !info.IsDir() && strings.HasSuffix(info.Name(), ".md") && strings.HasPrefix(info.Name(), "2025-01") {
 			file, err := os.Open(path)
 			if err != nil {
 				fmt.Println("Ошибка открытия файла:", err)

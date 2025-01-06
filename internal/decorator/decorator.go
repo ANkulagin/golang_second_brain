@@ -42,6 +42,11 @@ func (d *Decorator) decorateDirectories(path string, inheritedEmoji string) erro
 		oldName := entry.Name()
 		oldPath := filepath.Join(path, oldName)
 
+		// Пропускаем директории, которые начинаются с "." или "_"
+		if strings.HasPrefix(oldName, ".") || strings.HasPrefix(oldName, "_") {
+			continue
+		}
+
 		// Определяем эмодзи для текущего элемента: если оно уже есть, то берем его, иначе используем унаследованное.
 		currentEmoji := emoji.GetEmoji(oldName)
 		if currentEmoji == "" {
